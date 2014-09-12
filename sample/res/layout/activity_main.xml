@@ -8,10 +8,10 @@
         android:layout_height="match_parent"
         android:src="@drawable/book_cover" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Something something something something Something something something something Something something something something Something something something something Something something something something Something something something something Something something something something Something something something something Something something something something" />
+        android:text="Edit me Edit me Edit me Edit me Edit me Edit me Edit me Edit me Edit me Edit me Edit me " />
 
     <TextView
         android:layout_width="match_parent"
