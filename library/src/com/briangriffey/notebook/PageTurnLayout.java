@@ -10,12 +10,15 @@ import android.graphics.Shader;
 import android.os.Handler;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
 public class PageTurnLayout extends FrameLayout implements OnGestureListener {
+
+	private String TAG = "PageTurnLayout";
 
 	private Point mLastTouchPoint;
 	private Rect mTopViewRect;
@@ -26,8 +29,8 @@ public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 
 	private int mPageTouchSlop;
 	private boolean mIsTurning;
-	private GestureDetectorCompat mDetector; 
-	
+	private GestureDetectorCompat mDetector;
+
 	private PageTurnDirection mDirection;
 	private float mFirstX;
 
@@ -58,9 +61,9 @@ public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 		mTopViewRect = new Rect();
 
 		// Instantiate the gesture detector with the
-        // application context and an implementation of
-        // GestureDetector.OnGestureListener
-        mDetector = new GestureDetectorCompat(getContext(),this);
+		// application context and an implementation of
+		// GestureDetector.OnGestureListener
+		mDetector = new GestureDetectorCompat(getContext(), this);
 		mPageTouchSlop = (int) getResources().getDimension(R.dimen.touch_start_padding);
 	}
 
@@ -108,6 +111,12 @@ public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		this.mDetector.onTouchEvent(event);
+		// Be sure to call the superclass implementation
+		return super.onTouchEvent(event);
+	}
+	
+	public boolean onTouchEventDeprecated(MotionEvent event) {
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN && !mIsTurning) {
 
@@ -272,39 +281,37 @@ public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 	}
 
 	@Override
-	public boolean onDown(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean onDown(MotionEvent event) {
+		Log.d(TAG, "onDown: " + event.toString());
+		return true;
 	}
 
 	@Override
-	public void onShowPress(MotionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void onShowPress(MotionEvent event) {
+		Log.d(TAG, "onShowPress: " + event.toString());
 	}
 
 	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean onSingleTapUp(MotionEvent event) {
+		Log.d(TAG, "onSingleTapUp: " + event.toString());
+		return true;
 	}
 
 	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		// TODO Auto-generated method stub
-		return false;
+		Log.d(TAG, "onScroll: " + e1.toString() + e2.toString());
+		return true;
 	}
 
 	@Override
-	public void onLongPress(MotionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void onLongPress(MotionEvent event) {
+		Log.d(TAG, "onLongPress: " + event.toString());
 	}
 
 	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
+		Log.d(TAG, "onFling: " + event1.toString() + event2.toString());
+		return true;
 	}
 
 }
