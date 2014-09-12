@@ -8,12 +8,14 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.os.Handler;
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class PageTurnLayout extends FrameLayout {
+public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 
 	private Point mLastTouchPoint;
 	private Rect mTopViewRect;
@@ -24,7 +26,8 @@ public class PageTurnLayout extends FrameLayout {
 
 	private int mPageTouchSlop;
 	private boolean mIsTurning;
-
+	private GestureDetectorCompat mDetector; 
+	
 	private PageTurnDirection mDirection;
 	private float mFirstX;
 
@@ -54,6 +57,10 @@ public class PageTurnLayout extends FrameLayout {
 		mBottomViewRect = new Rect();
 		mTopViewRect = new Rect();
 
+		// Instantiate the gesture detector with the
+        // application context and an implementation of
+        // GestureDetector.OnGestureListener
+        mDetector = new GestureDetectorCompat(getContext(),this);
 		mPageTouchSlop = (int) getResources().getDimension(R.dimen.touch_start_padding);
 	}
 
@@ -262,6 +269,42 @@ public class PageTurnLayout extends FrameLayout {
 		} else {
 			getChildAt(mCurrentPage).draw(canvas);
 		}
+	}
+
+	@Override
+	public boolean onDown(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
