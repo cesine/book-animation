@@ -10,15 +10,12 @@ import android.graphics.Shader;
 import android.os.Handler;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class PageTurnLayout extends FrameLayout implements OnGestureListener {
+public class PageTurnLayout extends FrameLayout{
 
-	private String TAG = "PageTurnLayout";
 
 	private Point mLastTouchPoint;
 	private Rect mTopViewRect;
@@ -63,7 +60,7 @@ public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 		// Instantiate the gesture detector with the
 		// application context and an implementation of
 		// GestureDetector.OnGestureListener
-		mDetector = new GestureDetectorCompat(getContext(), this);
+		mDetector = new GestureDetectorCompat(getContext(), new PageTurnGestureListener());
 		mPageTouchSlop = (int) getResources().getDimension(R.dimen.touch_start_padding);
 	}
 
@@ -280,38 +277,5 @@ public class PageTurnLayout extends FrameLayout implements OnGestureListener {
 		}
 	}
 
-	@Override
-	public boolean onDown(MotionEvent event) {
-		Log.d(TAG, "onDown: " + event.toString());
-		return true;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent event) {
-		Log.d(TAG, "onShowPress: " + event.toString());
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent event) {
-		Log.d(TAG, "onSingleTapUp: " + event.toString());
-		return true;
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		Log.d(TAG, "onScroll: " + e1.toString() + e2.toString());
-		return true;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent event) {
-		Log.d(TAG, "onLongPress: " + event.toString());
-	}
-
-	@Override
-	public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
-		Log.d(TAG, "onFling: " + event1.toString() + event2.toString());
-		return true;
-	}
 
 }
